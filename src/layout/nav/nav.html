@@ -14,11 +14,11 @@
             <a>Messages</a>    
         </nav>
         <div class="flex align-middle ml-auto gap-3">
-            @if (loggedIn()){
+            @if (accountService.currentUser(); as user) {
             <details class="dropdown dropdown-end">
                 <summary class="flex items-center text-white text-xl gap-3 cursor-pointer" >
                     <img src="/user.png" alt="user avatar" class="w-8 h-8 rounded-full">
-                    <span>Bob</span>
+                    <span>{{user.displayName}}</span>
                     
                     
                 </summary>
