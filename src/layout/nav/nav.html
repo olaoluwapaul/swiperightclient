@@ -34,7 +34,7 @@
                     </svg>
                     <span>{{selectedTheme()}}</span>
                 </div>
-                <ul tabindex="1" class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+                <ul tabindex="1" class="dropdown-content z-50 menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
                     @for (theme of themes; track $index) {
                         <li (click)="handleSelectTheme(theme)">
                             <a>{{theme}}</a>
@@ -44,7 +44,7 @@
             </div>
 
             @if (accountService.currentUser(); as user) {
-            <details class="dropdown dropdown-end">
+            <details #userMenu class="dropdown dropdown-end">
                 <summary class="flex items-center text-white text-xl gap-3 cursor-pointer">
                     <img [src]="user?.imageUrl ||'/user.png'" alt="user avatar" class="w-10 h-10 rounded-full">
                     <span>{{user.displayName}}</span>
@@ -52,8 +52,8 @@
 
                 </summary>
                 <ul class="menu dropdown-content bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
-                    <li><a>Edit Profile</a></li>
-                    <li><a (click)="logout()">Logout</a></li>
+                    <li><a routerLink="/members/{{user.id}}" (click)="userMenu.open = false">Edit Profile</a></li>
+                    <li><a (click)="userMenu.open = false; logout()">Logout</a></li>
                 </ul>
             </details>
             } @else {
